@@ -1,3 +1,5 @@
+#!/usr/local/bin/python3
+
 import random
 import string
 import hashlib
@@ -56,17 +58,37 @@ class PasswordManager:
             json.dump(data, file, indent=4)  # Correction de l'indentation
 
     def main(self):
-        self.username = input("Entrez votre nom d'utilisateur : ")
-        password = self.get_user_password()
+        try:
+            self.username = input("Entrez votre nom d'utilisateur : ")
 
-        hashed_password = self.hash_password(password)
-        self.passwords[self.username] = hashed_password
+            # Afficher trois phrases successives
+            print("Bienvenue,", self.username)
+            print("Veuillez choisir une option :")
+            print("1. Entrer manuellement votre mot de passe")
+            print("2. Générer un mot de passe aléatoirement")
 
-        self.save_password_to_file()
+            # Option pour choisir entre entrer manuellement ou générer automatiquement un mot de passe
+            choice = input("Votre choix (1 ou 2) : ")
 
-        print("Mot de passe enregistré avec succès.")
+            if choice == "1":
+                password = self.get_user_password()
+            elif choice == "2":
+                password = self.generate_random_password()
+                print(f"Mot de passe généré automatiquement : {password}")
+            else:
+                print("Choix invalide. Quitter le programme.")
+                return
+
+            hashed_password = self.hash_password(password)
+            self.passwords[self.username] = hashed_password
+
+            self.save_password_to_file()
+
+            print("Mot de passe enregistré avec succès.")
+        except KeyboardInterrupt:
+            print("\nInterruption du programme. Au revoir!")
+            exit(0)
 
 if __name__ == "__main__":
     password_manager = PasswordManager()
     password_manager.main()
-
