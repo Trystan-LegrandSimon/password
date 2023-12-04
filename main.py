@@ -64,8 +64,8 @@ class PasswordManager:
             # Afficher trois phrases successives
             print("Bienvenue,", self.username)
             print("Veuillez choisir une option :")
-            print("1. Entrer manuellement votre mot de passe")
-            print("2. Générer un mot de passe aléatoirement")
+            print("1. Entrer manuellement votre mot de passe.")
+            print("2. Générer un mot de passe aléatoirement.")
 
             # Option pour choisir entre entrer manuellement ou générer automatiquement un mot de passe
             choice = input("Votre choix (1 ou 2) : ")
